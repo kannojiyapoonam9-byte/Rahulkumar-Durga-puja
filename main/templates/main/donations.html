@@ -77,14 +77,19 @@
                 <h2 class="page-title">SUPPORT US</h2>
                 <p class="text-muted mb-4">Make a donation to help us organize a grand Durga Puja.</p>
             </div>
-            <div class="card-body p-0">
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn custom-btn w-100">Donate Now</button>
-                    </div>
-                </form>
+            <div class="card-body p-0 text-center">
+                {% if user.is_authenticated and user.is_superuser %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn custom-btn w-100">Add Record</button>
+                        </div>
+                    </form>
+                {% else %}
+                    <h5 class="mt-4 text-dark">We appreciate your support!</h5>
+                    <p class="text-muted mt-3">To make a donation, please contact the Puja Committee directly. Once your donation is received, our admin will add your name to the Donors list below.</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@ def gallery(request):
     return render(request, 'main/gallery.html', {'posts': posts})
 
 def donation_view(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_superuser:
         form = DonationForm(request.POST)
         if form.is_valid():
             form.save()
