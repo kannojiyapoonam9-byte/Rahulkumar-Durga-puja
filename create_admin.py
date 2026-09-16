@@ -13,10 +13,10 @@ else:
     print("Superuser 'admin' already exists.")
 
 
-# Purana admin
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
+# # Purana admin
+# if not User.objects.filter(username='admin').exists():
+#     User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
 
-# Naya admin (aise add kar sakte hain)
-if not User.objects.filter(username='Raju').exists():
-    User.objects.create_superuser('Raju', 'rohit@example.com', 'Raju1219')
+# # Naya admin (aise add kar sakte hain)
+# if not User.objects.filter(username='Raju').exists():
+#     User.objects.create_superuser('Raju', 'rohit@example.com', 'Raju1219')
