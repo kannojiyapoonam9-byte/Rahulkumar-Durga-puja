@@ -19,4 +19,4 @@ if not User.objects.filter(username='admin').exists():
 
 # # Naya admin (aise add kar sakte hain)
 if not User.objects.filter(username='Rahul').exists():
-    User.objects.create_superuser('Raju', 'rohit@example.com', 'Rahul2005@')
+    User.objects.create_superuser('Rahul', 'rohit@example.com', 'Rahul2005@')
