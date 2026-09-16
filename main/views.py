@@ -42,19 +42,8 @@ def contact_view(request):
 from .models import Post, Donation, CommitteeMember, UserProfile
 
 def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            profile_image = form.cleaned_data.get('profile_image')
-            UserProfile.objects.create(user=user, profile_image=profile_image)
-            messages.success(request, 'Registration successful! You can now log in.')
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'main/register.html', {'form': form})
+    messages.error(request, 'Registration is closed. Only admin can login.')
+    return redirect('home')
 
 def user_login(request):
     if request.method == 'POST':
@@ -63,12 +52,12 @@ def user_login(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None and user.is_superuser:
                 login(request, user)
-                messages.success(request, f'Welcome {username}!')
+                messages.success(request, f'Welcome Admin {username}!')
                 return redirect('dashboard')
             else:
-                messages.error(request, 'Invalid username or password.')
+                messages.error(request, 'Access Denied. Only Admins can login.')
         else:
             messages.error(request, 'Invalid username or password.')
     else:
