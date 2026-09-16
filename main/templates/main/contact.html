@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<style>
+    .modern-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+    }
+    .modern-card input, .modern-card textarea {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 1px solid #ced4da;
+    }
+    .modern-card input:focus, .modern-card textarea:focus {
+        border-color: #b71c1c;
+        box-shadow: 0 0 0 0.2rem rgba(183, 28, 28, 0.25);
+    }
+    .page-title {
+        color: #870000;
+        font-weight: 800;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+    .custom-btn {
+        background: linear-gradient(90deg, #870000, #b71c1c);
+        border: none;
+        border-radius: 30px;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: all 0.3s;
+        color: white;
+    }
+    .custom-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(183, 28, 28, 0.4);
+        color: #ffeb3b;
+    }
+    .modern-card label {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-8 col-lg-7 mb-4">
+        <div class="card modern-card shadow-lg p-4 p-md-5">
+            <div class="text-center">
+                <h2 class="page-title">GET IN TOUCH</h2>
+                <p class="text-muted mb-4">Have any questions or suggestions? We'd love to hear from you.</p>
+            </div>
+            <div class="card-body p-0">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn custom-btn w-100">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

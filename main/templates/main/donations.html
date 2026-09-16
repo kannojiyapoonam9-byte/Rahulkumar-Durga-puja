@@ -1,0 +1,129 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<style>
+    .modern-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+    }
+
+    .modern-card input,
+    .modern-card textarea {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 1px solid #ced4da;
+    }
+
+    .modern-card input:focus,
+    .modern-card textarea:focus {
+        border-color: #b71c1c;
+        box-shadow: 0 0 0 0.2rem rgba(183, 28, 28, 0.25);
+    }
+
+    .page-title {
+        color: #870000;
+        font-weight: 800;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    .custom-btn {
+        background: linear-gradient(90deg, #870000, #b71c1c);
+        border: none;
+        border-radius: 30px;
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: all 0.3s;
+        color: white;
+    }
+
+    .custom-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(183, 28, 28, 0.4);
+        color: #ffeb3b;
+    }
+
+    .modern-card label {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 5px;
+    }
+
+    .table-modern {
+        margin-bottom: 0;
+    }
+
+    .table-modern thead th {
+        background: #870000;
+        color: #ffeb3b;
+        border: none;
+        padding: 15px;
+    }
+
+    .table-modern tbody td {
+        padding: 15px;
+        vertical-align: middle;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card modern-card shadow-lg p-4 p-md-5 h-100">
+            <div class="text-center">
+                <h2 class="page-title">SUPPORT US</h2>
+                <p class="text-muted mb-4">Make a donation to help us organize a grand Durga Puja.</p>
+            </div>
+            <div class="card-body p-0">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn custom-btn w-100">Donate Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card modern-card shadow-lg h-100">
+            <div class="text-center p-4">
+                <h2 class="page-title mb-0">RECENT DONORS</h2>
+                <p class="text-muted">( चंदा देने वालों की सूची )</p>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-modern">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount (₹)</th>
+                                <th>Address</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for donor in donors %}
+                            <tr>
+                                <td class="fw-bold text-dark">{{ donor.name }}</td>
+                                <td class="text-success fw-bold">₹{{ donor.amount }}</td>
+                                <td class="text-muted">{{ donor.address|default:"Not Provided" }}</td>
+                                <td class="text-muted">{{ donor.date|date:"M d, Y" }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center py-4 text-muted">No donations yet. Be the first!</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

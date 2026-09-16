@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .auth-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+    }
+    .auth-card input {
+        border-radius: 10px;
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+    }
+    .auth-card input:focus {
+        border-color: #b71c1c;
+        box-shadow: 0 0 0 0.2rem rgba(183, 28, 28, 0.25);
+    }
+    .auth-title {
+        color: #870000;
+        font-weight: 800;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+    }
+    .auth-btn {
+        background: linear-gradient(90deg, #870000, #b71c1c);
+        border: none;
+        border-radius: 30px;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: all 0.3s;
+    }
+    .auth-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(183, 28, 28, 0.4);
+    }
+    .auth-card label {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 5px;
+    }
+    .auth-card p {
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-7 col-lg-6 mb-4">
+        <div class="card auth-card shadow-lg p-4">
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <img src="{% static 'images/logo_transparent.png' %}" alt="Logo" width="70" class="mb-3">
+                    <h3 class="auth-title">CREATE ACCOUNT</h3>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-danger w-100 auth-btn mt-2">Sign Up</button>
+                </form>
+                <div class="mt-4 text-center">
+                    <p class="text-muted mb-1">Already have an account?</p>
+                    <a href="{% url 'login' %}" class="text-decoration-none fw-bold" style="color: #b71c1c;">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

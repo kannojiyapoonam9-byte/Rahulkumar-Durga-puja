@@ -1,0 +1,93 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .modern-card {
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+    }
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #b71c1c;
+        box-shadow: 0 4px 10px rgba(183, 28, 28, 0.2);
+        background-color: #fff;
+    }
+    .admin-name {
+        color: #870000;
+        font-weight: 800;
+        font-size: 1.8rem;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
+    .admin-role {
+        color: #b71c1c;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    .custom-btn {
+        background: linear-gradient(90deg, #870000, #b71c1c);
+        border: none;
+        border-radius: 30px;
+        padding: 10px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: all 0.3s;
+        color: white;
+    }
+    .custom-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(183, 28, 28, 0.4);
+        color: #ffeb3b;
+    }
+    .custom-btn-outline {
+        border: 2px solid #b71c1c;
+        background: transparent;
+        color: #b71c1c;
+        border-radius: 30px;
+        padding: 8px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: all 0.3s;
+        text-decoration: none;
+    }
+    .custom-btn-outline:hover {
+        background: #b71c1c;
+        color: white;
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card modern-card shadow-lg p-4 p-md-5 text-center">
+            
+            <!-- Admin Profile Image -->
+            {% if profile_image_url %}
+                <img src="{{ profile_image_url }}" alt="Admin Profile" class="profile-img mx-auto d-block">
+            {% else %}
+                <img src="{% static 'images/logo_transparent.png' %}" alt="Admin Profile" class="profile-img mx-auto d-block">
+            {% endif %}
+            
+            <!-- Admin Name -->
+            <h2 class="admin-name">{{ user.get_full_name|default:user.username }}</h2>
+            <p class="admin-role">Admin</p>
+            
+            <hr class="my-4" style="border-color: #b71c1c; opacity: 0.2;">
+            
+            <div class="d-flex justify-content-center gap-3 flex-wrap mt-3">
+                <a href="/admin/" class="btn custom-btn shadow-sm" target="_blank">Admin Panel</a>
+                <a href="{% url 'home' %}" class="custom-btn-outline">Home Page</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

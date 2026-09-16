@@ -1,0 +1,202 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+{% block content %}
+<marquee class="mb-2 pt-2 text-start text-danger fw-bold bg-white ">
+    <h4>✨ आप सभी श्रद्धालुओं से सादर अनुरोध है कि परिवार सहित पधारकर माँ दुर्गा का आशीर्वाद प्राप्त करें। ✨</h4>
+</marquee>
+<style>
+    marquee {
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+        background: #978d36;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    marquee-content {
+        display: inline-block;
+        padding-left: 100%;
+        animation: scroll-left 10s linear infinite;
+    }
+
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
+<div class="text-center mb-4">
+    <img src="{% static 'images/banner.png' %}" class="img-fluid rounded shadow-sm w-100"
+        alt="Bal Durga Puja Samiti Banner">
+</div>
+
+
+<style>
+    .committee-section {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 40px 20px;
+        margin-bottom: 40px;
+    }
+
+    .committee-title {
+        color: #870000;
+        font-weight: 800;
+        margin-bottom: 35px;
+        letter-spacing: 1px;
+    }
+
+    .member-card {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .member-img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #b71c1c;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s;
+        margin-bottom: 15px;
+        background-color: #fff;
+    }
+
+    .member-card:hover .member-img {
+        transform: scale(1.08);
+        border-color: #ffeb3b;
+    }
+
+    .member-name {
+        font-weight: bold;
+        color: #333;
+        font-size: 1.15rem;
+        margin-bottom: 2px;
+    }
+
+    .member-role {
+        color: #b71c1c;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    @media (max-width: 576px) {
+        .member-img {
+            width: 80px;
+            height: 80px;
+            border-width: 2px;
+            margin-bottom: 8px;
+        }
+        .member-name {
+            font-size: 0.85rem;
+        }
+        .member-role {
+            font-size: 0.7rem;
+        }
+        .committee-section {
+            padding: 25px 10px;
+        }
+        .member-card {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+</style>
+
+<div class="committee-section">
+    <h2 class="text-center committee-title">पदाधिकारी (Committee Members)</h2>
+    <div class="row justify-content-center">
+        {% for member in committee %}
+        <div class="col-4 col-md-4 col-lg-2 member-card">
+            {% if member.image %}
+            <img src="{{ member.image.url }}" alt="{{ member.name }}" class="member-img">
+            {% else %}
+            <img src="{% static 'images/logo_transparent.png' %}" alt="{{ member.name }}" class="member-img">
+            {% endif %}
+            <h5 class="member-name">{{ member.name }}</h5>
+            <p class="member-role">{{ member.role }}</p>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">Committee members will appear here.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="text-center p-5 rounded shadow-sm mb-4 position-relative"
+    style="background-image: url('{% static 'images/home_bg.jpg' %}'); background-size: cover; background-position: center; color: white; min-height: 400px; display: flex; align-items: center; justify-content: center;">
+    <div
+        style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); border-radius: inherit;">
+    </div>
+    <div class="position-relative w-100" style="z-index: 1;">
+        <h1 class="display-4 fw-bold"
+            style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8); color: #ffeb3b; font-family: 'Georgia', serif;">༺❖༻ बाल
+            दुर्गा पूजा समिति ༺❖༻</h1>
+        <p class="lead fw-bold mt-3" style="text-shadow: 1px 1px 5px rgba(0,0,0,0.8); font-size: 1.5rem;">इमिलिया बाज़ार
+            • चुनार • मिर्जापुर – 231304</p>
+        <a class="btn btn-danger btn-lg mt-4 fw-bold shadow px-5 py-2" href="{% url 'donations' %}" role="button"
+            style="background: linear-gradient(90deg, #870000, #b71c1c); border: none; font-size: 1.5rem; border-radius: 30px;">Donate
+            Now</a>
+    </div>
+</div>
+<h2 class="mb-4 text-center text-danger fw-bold bg-white">Recent Updates</h2>
+
+
+<!-- <style>
+    .recent-img {
+        width: 100%;
+        aspect-ratio: 4 / 2;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        background-color: #ffffff;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .recent-video {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        object-fit: cover;
+        background-color: #000000;
+    }
+    @media (max-width: 576px) {
+        .recent-card-body {
+            padding: 10px;
+        }
+        .recent-card-title {
+            font-size: 1rem;
+        }
+    }
+</style>
+<div class="row">
+    {% for post in posts %}
+    <div class="col-6 col-md-4 mb-4 px-2">
+        <div class="card shadow-sm h-100">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top recent-img" alt="{{ post.title }}">
+            {% elif post.video %}
+            <video class="card-img-top recent-video" controls>
+                <source src="{{ post.video.url }}" type="video/mp4">
+            </video>
+            {% endif %}
+            <div class="card-body d-flex flex-column recent-card-body">
+                <h5 class="card-title recent-card-title">{{ post.title }}</h5>
+                <p class="card-text text-truncate" style="font-size: 0.85rem;">{{ post.description }}</p>
+                <p class="text-muted mt-auto" style="font-size: 0.75rem;"><i class="fas fa-calendar-alt me-1"></i> {{ post.created_at|date:'d M Y' }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center w-100">No updates yet.</p>
+    {% endfor %}
+</div> -->
+{% endblock %}
