@@ -7,7 +7,7 @@ from .models import Post, Donation, CommitteeMember
 from .forms import DonationForm, ContactForm, UserRegisterForm
 
 def home(request):
-    recent_posts = Post.objects.order_by('-created_at')[:6]
+    recent_posts = Post.objects.order_by('-created_at')
     committee = CommitteeMember.objects.all()
     return render(request, 'main/home.html', {'posts': recent_posts, 'committee': committee})
 
